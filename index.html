@@ -450,25 +450,33 @@
  </head>
  <body>
   <!-- Header -->
-  <header class="header">
-   <nav class="nav-container">
+ <header class="header">
+  <nav class="nav-container">
     <div class="logo">
-      <img src="img/lg.png" alt="Consultorio Salud" style="height: 70px; width: auto;">
+      <img src="img/lg.png" alt="RAIS Atención Integral en Salud" style="height: 70px; width: auto;">
     </div>
     <ul class="nav-menu" id="nav-menu">
-     <li><a href="#" class="nav-link active" data-page="home" data-es="Inicio" data-en="Home">Inicio</a></li>
-     <li><a href="#" class="nav-link" data-page="about" data-es="El Consultorio" data-en="The Clinic">El Consultorio</a></li>
-     <li><a href="#" class="nav-link" data-page="services" data-es="Servicios" data-en="Services">Servicios</a></li>
-     <li><a href="#" class="nav-link" data-page="team" data-es="Instalaciones" data-en="Facilities">Instalaciones</a></li>
-     <li><a href="#" class="nav-link" data-page="contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
-     <li>
-      <div class="language-selector"><button class="lang-btn active" data-lang="es">ES</button> <button class="lang-btn" data-lang="en">EN</button>
-      </div></li>
-     <li><a href="#" class="cta-button nav-link" data-page="contact" data-es="Reservar Cita" data-en="Book Appointment">Reservar Cita</a></li>
-    <div class="mobile-menu-toggle" id="mobile-toggle"><span></span> <span></span> <span></span>
+      <li><a href="#" class="nav-link active" data-page="home" data-es="Inicio" data-en="Home">Inicio</a></li>
+      <li><a href="#" class="nav-link" data-page="about" data-es="El Consultorio" data-en="The Clinic">El Consultorio</a></li>
+      <li><a href="#" class="nav-link" data-page="services" data-es="Servicios" data-en="Services">Servicios</a></li>
+      <li><a href="#" class="nav-link" data-page="team" data-es="Instalaciones" data-en="Facilities">Instalaciones</a></li>
+      <li><a href="#" class="nav-link" data-page="contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+      <li>
+        <div class="language-selector">
+          <button class="lang-btn active" data-lang="es">ES</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </li>
+      <li><a href="#" class="cta-button nav-link" data-page="contact" data-es="Reservar Cita" data-en="Book Appointment">Reservar Cita</a></li>
+    </ul>
+    <!-- ✅ El botón de hamburguesa debe estar FUERA de <ul> -->
+    <div class="mobile-menu-toggle" id="mobile-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-   </nav>
-  </header>
+  </nav>
+</header>
 
   <!-- Main Content -->
   <main class="main-content">
