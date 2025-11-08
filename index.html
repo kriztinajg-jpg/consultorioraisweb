@@ -1,0 +1,1443 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAIS Atención integral en Salud</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Merriweather:wght@300;400;400i&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-color: #bfc52c;
+            --secondary-color: #06919d;
+            --background-light: #e7e6e6;
+            --text-dark: #4e4d4d;
+            --background-alt1: #e0f4f5;
+            --background-alt2: #fefcec;
+            --accent1: #f6c01d;
+            --accent2: #f29189;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+        .poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .lang-btn.active, .lang-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background: #a8b025;
+            transform: translateY(-2px);
+        }
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: 0.3s;
+        }
+        /* Main Content */
+       .page {
+         display: none;
+        padding-top: 80px;  
+         }
+        #home-page {
+        padding-top: 0 !important;
+        }
+        .page {
+            display: none;
+              padding-top: 80px;
+        }
+        .page.active {
+            display: block;
+        }
+        /* Hero Section - Sobrescribe el estilo anterior */
+        .hero {
+            position: relative;
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+        }
+        .hero-bg.active {
+            opacity: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        /* Trust Modules */
+        .trust-section {
+            background: var(--background-alt1);
+            padding: 80px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .trust-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .trust-card:hover {
+            transform: translateY(-5px);
+        }
+        .trust-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .trust-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        /* Services Section */
+        .services-section {
+         background: linear-gradient(135deg, #f8fcfd 0%, #e0f4f5 100%);
+         padding: 80px 20px;
+        }
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .service-card {
+            background: var(--background-alt2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+        .service-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        /* Testimonials */
+        .testimonials {
+            background: var(--background-light);
+            padding: 80px 20px;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .testimonial-card {
+            background: var(--accent1);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: serif;
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-author {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .team-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        .team-photo {
+            width: 100%;
+            height: 250px;
+            background: var(--background-alt1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--secondary-color);
+        }
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .team-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        .team-specialty {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        /* Contact Section */
+        .contact-section {
+            background: var(--background-alt1);
+            padding: 80px 20px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--background-light);
+            border-radius: 8px;
+            font-family: 'Merriweather', serif;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        .contact-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            width: 40px;
+        }
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+ </head>
+ <body>
+  <!-- Header -->
+  <header class="header">
+   <nav class="nav-container">
+    <div class="logo">
+      <img src="img/lg.png" alt="Consultorio Salud" style="height: 70px; width: auto;">
+    </div>
+    <ul class="nav-menu" id="nav-menu">
+     <li><a href="#" class="nav-link active" data-page="home" data-es="Inicio" data-en="Home">Inicio</a></li>
+     <li><a href="#" class="nav-link" data-page="about" data-es="El Consultorio" data-en="The Clinic">El Consultorio</a></li>
+     <li><a href="#" class="nav-link" data-page="services" data-es="Servicios" data-en="Services">Servicios</a></li>
+     <li><a href="#" class="nav-link" data-page="team" data-es="Instalaciones" data-en="Facilities">Instalaciones</a></li>
+     <li><a href="#" class="nav-link" data-page="contact" data-es="Contacto" data-en="Contact">Contacto</a></li>
+     <li>
+      <div class="language-selector"><button class="lang-btn active" data-lang="es">ES</button> <button class="lang-btn" data-lang="en">EN</button>
+      </div></li>
+     <li><a href="#" class="cta-button nav-link" data-page="contact" data-es="Reservar Cita" data-en="Book Appointment">Reservar Cita</a></li>
+    <div class="mobile-menu-toggle" id="mobile-toggle"><span></span> <span></span> <span></span>
+    </div>
+   </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Home Page -->
+    <div class="page active" id="home-page">
+      <!-- Hero Section con imágenes de fondo -->
+      <section class="hero">
+        <div class="hero-bg" style="background-image: url('img/hero1.png');"></div>
+        <div class="hero-bg" style="background-image: url('img/hero2.png');"></div>
+        <div class="hero-bg" style="background-image: url('img/hero3.png');"></div>
+        <div class="hero-content">
+          <h1 id="hero-title">Atención Integral en Salud </h1>
+          <p id="hero-subtitle">Somos tu servicio de salud integral humano y resolutivo</p>
+          <a href="#" class="cta-button nav-link" data-page="contact" data-es="Reservar Cita Ahora" data-en="Book Appointment Now">Reservar Cita Ahora</a>
+      </section>
+
+      <!-- Trust Section -->
+      <section class="trust-section">
+        <div class="container">
+          <h2 class="section-title" data-es="¿Por qué elegirnos?" data-en="Why choose us?">¿Por qué elegirnos?</h2>
+          <div class="trust-grid">
+            <div class="trust-card">
+              <div class="trust-icon">🏥</div>
+              <h3 data-es="Accesibilidad y Flexibilidad en el servicio" data-en="  Accessibility and Flexibility in Service">
+               Accesibilidad y Flexibilidad en el servicio </h3>
+              <p data-es="Brindamos atención presencial, domiciliaria a través de telemedicina, facilitando el acceso a nuestros servicios en el momento y lugar que el paciente lo requiera.
+               " data-en="We offer in-person, home, and telemedicine care, ensuring easy access to our services anytime and anywhere you need them."
+            >Brindamos atención presencial, domiciliaria a través de telemedicina, facilitando el acceso a nuestros servicios en el momento y lugar que el paciente lo requiera </p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-icon">⚕️</div>
+        <h3 data-es="Atención Integral y Personalizada" data-en="Comprehensive and Personalized Care">Atención Integral y Personalizada</h3>
+              <p data-es="Ofrecemos un acompañamiento continuo, tanto al manejo de enfermedades como en el mantenimiento de la salud, adaptando estrategias especificas a las necesidades individuales de cada paciente." data-en="We offer continuous support, both in managing illnesses and maintaining health, tailoring specific strategies to each patient’s individual needs.">Ofrecemos un acompañamiento continuo, tanto al manejo de enfermedades como en el mantenimiento de la salud, adaptando estrategias especificas a las necesidades individuales de cada paciente</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-icon">❤️</div>
+              <h3 data-es="Calidad Humana y Académica" data-en="Human and academic excellence">Calidad Humana y Académica</h3>
+              <p data-es="Nuestro equipo combina empatía y profesionalismo, garantizando un trato cercano y cálido junto con un conocimiento médico actualizado y de alto nivel." data-en="Our team combines empathy and professionalism, ensuring a warm, personalized approach along with up-to-date, high-level medical expertise.">Nuestro equipo combina empatía y profesionalismo, garantizando un trato cercano y cálido junto con un conocimiento médico actualizado y de alto nivel.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Preview -->
+      <section class="services-preview">
+        <div class="container">
+          <h2 class="section-title" data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</h2>
+          <div class="services-grid">
+            <div class="service-card">
+              <h3 data-es="Medicina General" data-en="General Medicine">Medicina General</h3>
+              <p data-es="Consultas médicas integrales para toda la familia." data-en="Comprehensive medical consultations for the whole family.">Consultas médicas integrales para toda la familia.</p>
+            </div>
+            <div class="service-card">
+              <h3 data-es="Medicina Interna" data-en="Internal Medicine">Medicina Interna </h3>
+                 <p data-es="Prevención, diagnóstico y manejo de enfermedades con un enfoque humano y personalizado." data-en="Prevention, diagnosis, and management of diseases with a human and personalized approach.">Prevención, diagnóstico y manejo de enfermedades con un enfoque humano y personalizado.</p>
+            </div>
+            <div class="service-card"><h3 data-es="Psicología" data-en="Psychology">Psicología</h3>
+              <p data-es="Enfoque humanista con experiencia en violencias sexuales y basadas en género, intervensiones sociales y empresariales."Humanistic approach with experience in sexual and gender-based violence, as well as social and organizational interventions.">Enfoque humanista con experiencia en violencias sexuales y basadas en género, intervensiones sociales y empresariales.</p>
+            </div>
+            <div class="service-card">
+              <h3 data-es="Nutrición" data-en="Nutrition">Nutrición</h3>
+              <p data-es="Contamos con expertos en Nutrición "Sin Dietas", trastornos de la conducta alimentaria y nutrición maternoinfantil." data-en="We have experts in “No-Diet” Nutrition, eating behavior disorders, and maternal and child nutrition.">Contamos con expertos en Nutrición "Sin Dietas", trastornos de la conducta alimentaria y nutrición maternoinfantil.</p>
+            </div>
+          </div>
+          <div style="text-align: center;">
+           <a href="#" class="cta-button nav-link" data-page="services" data-es="Ver Todos los Servicios" data-en="View All Services">Ver Todos los Servicios</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="testimonials">
+        <div class="container">
+          <h2 class="section-title" data-es="Lo que dicen nuestros pacientes" data-en="What our patients say">Lo que dicen nuestros pacientes</h2>
+          <div class="testimonial-grid">
+            <div class="testimonial-card">
+              <p class="testimonial-text" data-es="Excelente atención. Todo el equipo se destaca por su profesionalismo y por estar siempre dispuesto a resolver cualquier duda con amabilidad y claridad." data-en="Excellent care. The entire team stands out for their professionalism and their constant willingness to address any questions with kindness and clarity.">Excelente atención. Todo el equipo se destaca por su profesionalismo y por estar siempre dispuesto a resolver cualquier duda con amabilidad y claridad.</p>
+              <p class="testimonial-author">- Sebastián Ciro</p>
+            </div>
+            <div class="testimonial-card">
+             <p class="testimonial-text" data-es="El Dr. Julián es el mejor. Lo tuve en una consulta a domicilio como segunda opinión. Pudo dar el diagnóstico correcto y corrigió un problema que otro médico había detectado. Hablaba un inglés excelente y era muy atento. Solo al final me di cuenta de que también era el dueño del lugar. Precios locales muy razonables, sin abusar del inglés como hacen en muchos otros lugares.
+             Comunicación por WhatsApp en inglés y español." data-en="Dr Julián is the best and I actively recommend to my friends who say the same. Had him for home consult as a second opinion. He was able to give the correct diagnosis and corrected an issue another doctor made. Great English and thoughtfulness. Only in the end did I come to realize he's the owner of the place as well. Very reasonable local prices not price gouging you for English like many other places do.
+            WhatsApp communication in English and Spanish.">El Dr. Julián es el mejor. Lo tuve en una consulta a domicilio como segunda opinión. Pudo dar el diagnóstico correcto y corrigió un problema que otro médico había detectado. Hablaba un inglés excelente y era muy atento. Solo al final me di cuenta de que también era el dueño del lugar. Precios locales muy razonables, sin abusar del inglés como hacen en muchos otros lugares.
+            Comunicación por WhatsApp en inglés y español.</p>
+              <p class="testimonial-author">- Dmitri</p>
+            </div>
+            <div class="testimonial-card">
+              <p class="testimonial-text" data-es="Excelente servicio médico con calidad humana y responsabilidad, los doctores siempre dan un poco más por sus pacientes, super recomendado." data-en="Excellent medical service with human quality and responsibility. The doctors always go the extra mile for their patients — highly recommended.">Excelente servicio médico con calidad humana y responsabilidad, los doctores siempre dan un poco más por sus pacientes, super recomendado.</p>
+              <p class="testimonial-author">- Angie Cantor</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- About Page -->
+    <div class="page" id="about-page">
+     <section style="
+    padding: 100px 20px 80px;
+    background: url('img/fondo-consultorio.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+">
+  <!-- Overlay semitransparente para legibilidad -->
+  <div style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7); /* Más transparente */
+    z-index: 1;
+  "></div>
+
+  <div class="container" style="position: relative; z-index: 2;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+    <h1 class="section-title" data-es="Nuestro Consultorio" data-en="Our Clinic">Nuestro Consultorio</h1>
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;" 
+         data-es="Somos tu servicio de salud confiable, ágil, resolutivo y con alta calidad humana y académica. Te acompañamos en tu enfermedad y en el mantenimiento de tu salud a lo largo del tiempo." 
+         data-en="We are your trusted, efficient, and solution-oriented healthcare service, distinguished by our human and academic excellence. We support you through illness and in maintaining your health over time.">
+        Somos tu servicio de salud confiable, ágil, resolutivo y con alta calidad humana y académica. Te acompañamos en tu enfermedad y en el mantenimiento de tu salud a lo largo del tiempo.
+      </p>
+      <p 
+         data-es="Integramos los distintos procesos médicos que llevas con tus especialistas y planeamos estrategias a tu medida para mejorar tu salud. Tenemos servicios presenciales, domiciliarios y por telemedicina. Además realizamos toma de muestras de laboratorio y electrocardiograma en la comodidad de tu casa. Siempre vamos a la raíz." 
+         data-en="We integrate the different medical processes you undergo with your specialists and design personalized strategies to improve your health. We offer in-person, home, and telemedicine services. In addition, we provide at-home lab sample collection and electrocardiograms — always going to the root of the problem.">
+        Integramos los distintos procesos médicos que llevas con tus especialistas y planeamos estrategias a tu medida para mejorar tu salud. Tenemos servicios presenciales, domiciliarios y por telemedicina. Además realizamos toma de muestras de laboratorio y electrocardiograma en la comodidad de tu casa. Siempre vamos a la raíz.
+      </p>
+    </div>
+    </div>
+    </section>
+
+    <!-- Misión y Visión -->
+<section style="padding: 80px 20px; background: var(--white);">
+  <div class="container">
+    <h2 class="section-title" data-es="Misión y Visión" data-en="Mission and Vision">Misión y Visión</h2>
+    <div class="trust-grid">
+      <!-- Misión -->
+      <div class="trust-card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--secondary-color);">🎯</div>
+        <h3 data-es="Misión" data-en="Mission">Misión</h3>
+        <p data-es="Brindar un servicio de salud confiable, ágil y resolutivo, fundamentado en la excelencia académica y humana, acompañando a nuestros usuarios desde el cuidado integral en la enfermedad hasta el mantenimiento continuo de su bienestar. Integramos y coordinamos los procesos médicos personalizados con un enfoque ético para diseñar estrategias a la medida que optimicen su calidad de vida." 
+           data-en="To provide a reliable, efficient, and solution-oriented healthcare service, grounded in academic and human excellence. We accompany our patients from comprehensive care during illness to the continuous maintenance of their well-being. We integrate and coordinate personalized medical processes with an ethical approach to design tailored strategies that optimize their quality of life.">
+          Brindar un servicio de salud confiable, ágil y resolutivo, fundamentado en la excelencia académica y humana, acompañando a nuestros usuarios desde el cuidado integral en la enfermedad hasta el mantenimiento continuo de su bienestar. Integramos y coordinamos los procesos médicos personalizados con un enfoque ético para diseñar estrategias a la medida que optimicen su calidad de vida.
+        </p>
+      </div>
+      <!-- Visión -->
+      <div class="trust-card">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--secondary-color);">🔭</div>
+        <h3 data-es="Visión" data-en="Vision">Visión</h3>
+        <p data-es="Ser reconocidos como la empresa líder en servicios de salud integrales, comprometida con la ética profesional, la calidad humana y académica, que transforme la experiencia de nuestros pacientes mediante una atención personalizada, eficiente y humanizada orientada a la mejora sostenible de su salud.
+            " 
+           data-en="To be recognized as the leading company in comprehensive healthcare services, committed to professional ethics, human and academic excellence, transforming our patients’ experience through personalized, efficient, and humanized care aimed at the sustainable improvement of their health.">
+            Ser reconocidos como la empresa líder en servicios de salud integrales, comprometida con la ética profesional, la calidad humana y académica, que transforme la experiencia de nuestros pacientes mediante una atención personalizada, eficiente y humanizada orientada a la mejora sostenible de su salud.
+            
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+    
+      </section>
+      <section style="padding: 80px 20px; background: var(--white);">
+        <div class="container">
+          <h2 class="section-title" data-es="Nuestros Valores" data-en="Our Values">Nuestros Valores</h2>
+          <div class="trust-grid">
+            <div class="trust-card">
+              <div class="trust-icon">🤝</div>
+               <h3 data-es="Integridad" data-en="Integrity">Integridad</h3>
+              <p data-es="Ofrecemos una atención completa y coordinada que abarca todas las dimensiones del bienestar del paciente." We offer comprehensive and coordinated care that encompasses all dimensions of the patient’s well-being.">Ofrecemos una atención completa y coordinada que abarca todas las dimensiones del bienestar del paciente.</p>
+            </div>
+            <div class="trust-card">
+             <div class="trust-icon">🧠</div>
+              <h3 data-es="Excelencia Profesional" data-en="Professional Excellence">Excelencia Profesional</h3>
+  
+             <p data-es="Cultivamos la dedicación y el compromiso con la calidad, la ética y la responsabilidad, asegurando una atención sanitaria segura, humana y fundamentada en principios éticos sólidos." data-en="We cultivate dedication and a strong commitment to quality, ethics, and responsibility, ensuring healthcare that is safe, compassionate, and grounded in solid ethical principles.">
+                Cultivamos la dedicación y el compromiso con la calidad, la ética y la responsabilidad, asegurando una atención sanitaria segura, humana y fundamentada en principios éticos sólidos.
+             </p>
+            </div>
+
+            <div class="trust-card">
+              <div class="trust-icon">💙</div>
+              <h3 data-es="Calidad Humana" data-en="Human quality">Calidad Humana</h3>
+              <p data-es="Priorizamos la empatía, el respeto y la cercanía en el trato con nuestros pacientes." data-en="We prioritize empathy, respect, and a warm, personal approach in our care for patients.">Priorizamos la empatía, el respeto y la cercanía en el trato con nuestros pacientes.</p>
+          </div>
+          <div class="trust-card">
+         <div class="trust-icon">⚖️</div>
+        <h3 data-es="Compromiso Ético" data-en="Ethical Commitment">Compromiso Ético</h3>
+        <p data-es="Actuamos con integridad y respeto hacia la dignidad de cada persona." data-en="We act with integrity and respect for each person’s dignity.">
+        Actuamos con integridad y respeto hacia la dignidad de cada persona.
+        </p>
+        </div>
+        <div class="trust-card">
+  <div class="trust-icon">🔒</div>
+  <h3 data-es="Confianza" data-en="Trust">Confianza</h3>
+  <p data-es="Construimos relaciones transparentes y seguras que generen tranquilidad en nuestros pacientes." data-en="We build transparent and trustworthy relationships that provide our patients with peace of mind.">
+    Construimos relaciones transparentes y seguras que generen tranquilidad en nuestros pacientes.
+  </p>
+</div>
+
+
+      </section>
+    </div>
+
+    <!-- Services Page -->
+<div class="page" id="services-page">
+  <section class="services-section" style="background: linear-gradient(135deg, #f8fcfd 0%, #e0f4f5 100%); padding: 100px 20px 80px;">
+    <div class="container">
+      <h1 class="section-title" data-es="Todos Nuestros Servicios" data-en="All Our Services">Todos Nuestros Servicios</h1>
+
+      <!-- Categoría 1: Atención integral en salud -->
+      <div style="
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border-left: 6px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+      "
+      onmouseover="this.style.transform='translateY(-5px)';"
+      onmouseout="this.style.transform='none';">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <span style="font-size: 2.5rem; color: var(--secondary-color);">🩺</span>
+          <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+              data-es="Atención integral en salud" 
+              data-en="Comprehensive Health Care">Atención integral en salud</h3>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Medicina General, presencial, virtual a Domicilio." data-en="General Medicine — In-person, Virtual, and Home Visits.">Medicina General, presencial, virtual a Domicilio.</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Chequeo Médico, basico y especializado." data-en="Medical Check-up — Basic and Specialized.">Chequeo Médico, basico y especializado.</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Manejo del dolor, acompañamiento cuidados paliativos." data-en="Pain Management and Palliative Care Support.">Manejo del dolor, acompañamiento cuidados paliativos.</span>
+            </li>
+           <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Nutrición, Contamos con expertos en Nutrición "Sin Dietas", trastornos de la conducta alimentaria y nutrición maternoinfantil." data-en="Nutrition — We have experts in “Non-Diet” Nutrition, Eating Disorders, and Maternal and Child Nutrition.">Nutrición, Contamos con expertos en Nutrición "Sin Dietas", trastornos de la conducta alimentaria y nutrición maternoinfantil.</span>
+            </li>
+             <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Psicología, enfoque humanista con experiencia en violencias sexuales y basadas en género, intervensiones sociales y empresariales." data-en="Psychology — Humanistic approach with experience in sexual and gender-based violence, as well as social and corporate interventions.">Psicología, enfoque humanista con experiencia en violencias sexuales y basadas en género, intervensiones sociales y empresariales.</span>
+            </li>
+             <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Fisioterapia." data-en="Physical Therapy.">Fisioterapia.</span>
+            </li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Terapia Holística, masaje Shirodhara, masoterapia china,Ventosas, cup cupping." data-en="olistic Therapy — Shirodhara Massage, Chinese Massage Therapy, Cup Cupping.">Terapia Holística, masaje Shirodhara, masoterapia china,Ventosas, cup cupping.</span>
+            </li>
+            
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Categoría 2: Medicina especializada -->
+      <div style="
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border-left: 6px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+      "
+      onmouseover="this.style.transform='translateY(-5px)';"
+      onmouseout="this.style.transform='none';">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <span style="font-size: 2.5rem; color: var(--secondary-color);">👨‍⚕️</span>
+          <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+              data-es="Medicina especializada" 
+              data-en="Specialized Medicine">Medicina especializada</h3>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Cardiología" data-en="Cardiology">Cardiología</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Ginecología y obstetricia" data-en="Gynecology and Obstetrics">Ginecología y obstetricia</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Dermatología" data-en="Dermatology">Dermatología</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Pediatría" data-en="Pediatrics">Pediatría</span>
+            </li>
+             <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Ortopedia" data-en="Orthopedics">Ortopedia</span>
+            </li>
+             <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Urología" data-en="Urology">Urología</span>
+            </li>
+          </ul>
+           <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Cirugia General" data-en="General Surgery">Cirugia General</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Deportología" data-en="Sports Medicine">Deportología</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Endocrinología" data-en="Endocrinology">Endocrinología</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Medicina Alternativa" data-en="Alternative Medicine">Medicina Alternativa</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Psiquiatría" data-en="Psychiatry">Psiquiatría</span>
+            </li>
+          </ul>
+           <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Medicina Interna" data-en="Internal Mediciney">Medicina Interna</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Nefrología Pediátrica" data-en="Pediatric Nephrology">Nefrología Pediátrica</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Neurología" data-en="Neurology">Neurología/<span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Oftalmología" data-en="Ophthalmology">Oftalmología</span>
+            </li>
+             <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Toxicología" data-en="Toxicology">Toxicología</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Categoría 3: Ayudas diagnósticas -->
+      <div style="
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border-left: 6px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+      "
+      onmouseover="this.style.transform='translateY(-5px)';"
+      onmouseout="this.style.transform='none';">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <span style="font-size: 2.5rem; color: var(--secondary-color);">🔬</span>
+          <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+              data-es="Ayudas diagnósticas" 
+              data-en="Diagnostic Support">Ayudas diagnósticas</h3>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Eco grafías" data-en="Ultrasounds">Eco grafías</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Radiografías" data-en="X-rays">Radiografías</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Resonancias" data-en="MRI scans">Resonancias</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Mamografía" data-en="Mammograms">Mamografía</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Tomografías" data-en="CT scans">Tomografías</span>
+            </li>
+          </ul>
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Endoscopias" data-en="Endoscopies">Endoscopias</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Colonoscopias" data-en="Colonoscopies">Colonoscopias</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Eco Doppler Color" data-en="Color Doppler Ultrasound">Eco Doppler Color</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Eco Stress" data-en="Stress Echocardiogram">Eco Stress</span>
+            </li>
+          </ul>
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Prueba de esfuerzo" data-en="Stress test">Prueba de esfuerzo</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="MAPA" data-en="Ambulatory Blood Pressure Monitoring (ABPM)">MAPA</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Holter" data-en="Holter monitoring">Holter</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Tilt Test" data-en="Tilt table test">Tilt Test</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Categoría 4: Procedimientos -->
+<div style="
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border-left: 6px solid var(--secondary-color);
+  transition: transform 0.3s ease;
+"
+onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 40px rgba(0,0,0,0.1)'"
+onmouseout="this.style.transform='none'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.08)'">
+  <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+    <span style="font-size: 2.5rem; color: var(--secondary-color);">💉</span>
+    <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+        data-es="Procedimientos" 
+        data-en="Procedures">Procedimientos</h3>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+    <!-- Columna 1 -->
+    <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Curación de heridas" data-en="Wound Care">Curación de heridas</span>
+        <span style="font-size: 0.9rem; color: #666; margin-left: 0.5rem;" data-es="(Baja, mediana y alta complejidad)" data-en="(Low, medium and high complexity)">(Baja, mediana y alta complejidad)</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Suturas y retiro de puntos" data-en="Sutures and Suture Removal">Suturas y retiro de puntos</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Cambio de sonda vesical" data-en="Urinary Catheter Change">Cambio de sonda vesical</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Limpieza de oídos" data-en="Ear Cleaning">Limpieza de oídos</span>
+        <span style="font-size: 0.9rem; color: #666; margin-left: 0.5rem;" data-es="(Extracción de cerumen seco bajo visión directa con video otoscopio y lavado de oídos)" data-en="(Dry cerumen removal under direct vision with video otoscope and ear irrigation)">(Extracción de cerumen seco bajo visión directa con video otoscopio y lavado de oídos)</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Aplicación de medicamentos e inyectología" data-en="Medication Administration and Injections">Aplicación de medicamentos e inyectología</span>
+      </li>
+    </ul>
+
+    <!-- Columna 2 -->
+    <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Escleroterapia" data-en="Sclerotherapy">Escleroterapia</span>
+        <span style="font-size: 0.9rem; color: #666; margin-left: 0.5rem;" data-es="(Dile adiós a esas arañitas y venas várices)" data-en="(Say goodbye to spider veins and varicose veins)">(Dile adiós a esas arañitas y venas várices)</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Terapia Neural" data-en="Neural Therapy">Terapia Neural</span>
+        <span style="font-size: 0.9rem; color: #666; margin-left: 0.5rem;" data-es="(Terapia alternativa basada en tu “historia de vida”)" data-en="(Alternative therapy based on your “life story”)">(Terapia alternativa basada en tu “historia de vida”)</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Terapia Respiratoria" data-en="Respiratory Therapy">Terapia Respiratoria</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Gestión Ayudas diagnósticas" data-en="Diagnostic Support Management">Gestión Ayudas diagnósticas</span>
+      </li>
+         <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Nebulizaciones" data-en="Nebulizations">Nebulizaciones</span>
+      </li>
+      <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+        <span data-es="Gestión Laboratorios a Domicilio" data-en="Home Laboratory Services">Gestión Laboratorios a Domicilio</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!-- Categoría 5: Paquete preventivo enfermedades cardiovasculares -->
+      <div style="
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border-left: 6px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+      "
+      onmouseover="this.style.transform='translateY(-5px)';"
+      onmouseout="this.style.transform='none';">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <span style="font-size: 2.5rem; color: var(--secondary-color);">❤️</span>
+          <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+              data-es="Paquete preventivo: enfermedades cardiovasculares" 
+              data-en="Preventive Package: Cardiovascular Diseases">Paquete preventivo: enfermedades cardiovasculares</h3>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Evaluación integral del riesgo cardiovascular" data-en="Comprehensive cardiovascular risk assessment">Evaluación integral del riesgo cardiovascular</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Perfil lipídico y electrocardiograma" data-en="Lipid profile and electrocardiogram">Perfil lipídico y electrocardiograma</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Asesoría nutricional" data-en="Nutritional counseling">Asesoría nutricional</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Categoría 6: Paquete ETS -->
+      <div style="
+        background: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border-left: 6px solid var(--secondary-color);
+        transition: transform 0.3s ease;
+      "
+      onmouseover="this.style.transform='translateY(-5px)';"
+      onmouseout="this.style.transform='none';">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <span style="font-size: 2.5rem; color: var(--secondary-color);">🛡️</span>
+          <h3 style="color: var(--secondary-color); font-family: 'Poppins', sans-serif; font-weight: 700; margin: 0;" 
+              data-es="Paquete de enfermedades de transmisión sexual (ETS)" 
+              data-en="Sexually Transmitted Infections (STI) Package">Paquete de enfermedades de transmisión sexual (ETS)</h3>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <ul style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Detección temprana y confidencial" data-en="Early and confidential detection">Detección temprana y confidencial</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="VIH, sífilis, hepatitis B y C" data-en="HIV, syphilis, hepatitis B and C">VIH, sífilis, hepatitis B y C</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Gonorrea, clamidia y más" data-en="Gonorrhea, chlamydia, and more">Gonorrea, clamidia y más</span>
+            </li>
+            <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;"><span style="width: 8px; height: 8px; background: #bfc52c; border-radius: 50%;"></span>
+              <span data-es="Orientación y manejo integral si es necesario" data-en="Guidance and comprehensive management if needed">Orientación y manejo integral si es necesario</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+    <!-- Gallery Page: Nuestras Instalaciones -->
+<div class="page" id="team-page">
+  <section style="padding: 100px 20px 80px; background: var(--background-light);">
+    <div class="container">
+      <h1 class="section-title" data-es="Nuestras Instalaciones" data-en="Our Facilities">Nuestras Instalaciones</h1>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <!-- Imagen 1 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion1.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <!-- Imagen 2 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion2.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <!-- Imagen 3 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion3.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <!-- Imagen 4 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion4.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <!-- Imagen 5 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion5.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <!-- Imagen 6 -->
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion6.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion7.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+        <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+          <img src="img/instalacion8.jpg" alt="Instalaciones del consultorio" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        </div>
+          </div>
+         </div>
+      </section>
+      </div>
+
+    <!-- Contact Page -->
+    <div class="page" id="contact-page">
+      <section class="contact-section">
+        <div class="container">
+          <h1 class="section-title" data-es="Contacto y Citas" data-en="Contact &amp; Appointments">Contacto y Citas</h1>
+          <div class="contact-grid">
+            <div class="contact-form">
+              <h3 class="poppins" style="margin-bottom: 1.5rem; color: var(--secondary-color);" data-es="Solicitar Cita" data-en="Request Appointment">Solicitar Cita</h3>
+              <form id="appointment-form" action="https://formspree.io/f/xwpwgzaw" method="POST">
+                <div class="form-group"><label for="name" data-es="Nombre completo" data-en="Full name">Nombre completo</label> <input type="text" id="name" name="name" required></div>
+                <div class="form-group"><label for="email" data-es="Correo electrónico" data-en="Email">Correo electrónico</label> <input type="email" id="email" name="email" required></div>
+                <div class="form-group"><label for="phone" data-es="Teléfono" data-en="Phone">Teléfono</label> <input type="tel" id="phone" name="phone" required></div>
+                <div class="form-group"><label for="service" data-es="Servicio solicitado" data-en="Requested service">Servicio solicitado</label>
+                  <select id="service" name="service" style="width: 100%; padding: 0.75rem; border: 2px solid var(--background-light); border-radius: 8px;">
+                    <option value="" data-es="Seleccionar servicio" data-en="Select service">Seleccionar servicio</option>
+                    <option value="general" data-es="Atención Integral en salud, Medicina general, Chequeos, etc" data-en="Comprehensive Healthcare — General Medicine, Medical Check-ups, and More">Atención Integral en salud, Medicina general, Chequeos, etc</option>
+                    <option value="cardiology" data-es="Medicina Especializada" data-en="Specialized Medicine">Medicina Especializada</option>
+                    <option value="pediatrics" data-es="Ayudas Diagnósticas" data-en="Diagnostic Support Services">Ayudas Diagnósticas</option>
+                    <option value="gynecology" data-es="Procedimientos" data-en="Procedures">Procedimientos</option>
+                  </select>
+                </div>
+                <div class="form-group"><label for="message" data-es="Mensaje adicional" data-en="Additional message">Mensaje adicional</label> <textarea id="message" name="message" rows="4"></textarea></div>
+               <div style="font-size: 0.85rem; margin-top: 1rem; color: #666;">
+                 <label>
+                <input type="checkbox" name="privacy_accepted" value="true" required ...>
+                 <span data-es="Acepto los" data-en="I accept the">Acepto los</span>
+                 <a href="docs/terminos-y-condiciones-.pdf" target="_blank" style="color: var(--secondary-color);">
+                 <span data-es="Términos y Condiciones" data-en="Terms and Conditions">Términos y Condiciones</span>
+                 </a>
+                 <span data-es="y la" data-en="and the">y la</span>
+                 <a href="docs/aviso-privacidad.pdf" target="_blank" style="color: var(--secondary-color);">
+                <span data-es="Política de Privacidad" data-en="Privacy Policy">Política de Privacidad</span>
+                    </a>
+                 </label>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;" data-es="Enviar Solicitud" data-en="Send Request">Enviar Solicitud</button>
+              </form>
+            </div>
+   <div class="contact-info">
+  <h3 class="poppins" style="margin-bottom: 1.5rem; color: var(--secondary-color);" 
+      data-es="Información de Contacto" 
+      data-en="Contact Information">
+    Información de Contacto
+  </h3>
+
+  <!-- Dirección -->
+  <div class="contact-item">
+    <div class="contact-icon">📍</div>
+    <div>
+      <strong data-es="Dirección:" data-en="Address:">Dirección:</strong><br>
+      <span data-es="Cra. 65 #51-22 Consultorio 102, Laureles - Estadio, Medellín, Antioquia" 
+            data-en="Cra. 65 #51-22 Office 102, Laureles - Estadio, Medellín, Antioquia">
+        Cra. 65 #51-22 Consultorio 102, Laureles - Estadio, Medellín, Antioquia
+      </span>
+    </div>
+  </div>
+
+  <!-- Mapa de Google Maps -->
+  <div style="margin-top: 1rem; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.448443777763!2d-75.5976943261537!3d6.248955030201385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429ed978cb26f%3A0xfcb7b94fd89f335!2sRAIS%20Atenci%C3%B3n%20Integral%20en%20Salud!5e0!3m2!1ses!2sco!4v1762482697457!5m2!1ses!2sco" 
+      width="100%" 
+      height="250" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- Teléfono -->
+  <div class="contact-item" style="margin-top: 1.5rem;">
+    <div class="contact-icon">📞</div>
+    <div>
+      <strong data-es="Teléfono:" data-en="Phone:">Teléfono:</strong><br>
+      +57 324 243 7967
+    </div>
+  </div>
+
+  <!-- Horarios -->
+  <div class="contact-item">
+    <div class="contact-icon">🕒</div>
+    <div>
+      <strong data-es="Horarios:" data-en="Hours:">Horarios:</strong><br>
+      <span data-es="Lun–Vie: 8:00–18:00<br>Sáb: 8:00–12:00" 
+            data-en="Mon–Fri: 8:00–18:00<br>Sat: 8:00–12:00">
+        Lun–Vie: 8:00–18:00<br>Sáb: 8:00–12:00
+      </span>
+    </div>
+  </div>
+
+  <!-- QR Code -->
+  <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+    <h4 class="poppins" style="color: var(--secondary-color); margin-bottom: 1rem; font-weight: 600;"
+        data-es="Agenda tu cita escaneando el QR" 
+        data-en="Book your appointment by scanning the QR code">
+      Agenda tu cita escaneando el QR
+    </h4>
+    <img src="img/qr.jpeg" alt="QR Code" 
+         style="width: 180px; height: 180px; 
+                border-radius: 12px; 
+                box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+                display: block;
+                margin: 0 auto;">
+  </div>
+
+  <!-- Redes sociales -->
+  <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+      <h4 class="poppins" 
+        style="color: var(--secondary-color); margin-bottom: 1rem; font-weight: 600;"
+        data-es="Síguenos" 
+        data-en="Follow Us">
+        Síguenos
+        </h4>
+    <div style="display: flex; justify-content: center; gap: 1.2rem; font-size: 1.8rem;">
+      <a href="https://www.facebook.com/saludraismed" target="_blank" style="color: #3b5998; text-decoration: none;"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/saludrais/" target="_blank" style="color: #e1306c; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+      <a href="https://api.whatsapp.com/send?phone=573242437967" target="_blank" style="color: #25D366; text-decoration: none;"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+ <footer class="footer">
+  <div class="container">
+    <p>© 2025 <span id="footer-clinic-name">RAIS Atención Integral en Salud </span>. 
+       <span data-es="Todos los derechos reservados." data-en="All rights reserved.">Todos los derechos reservados.</span>
+    </p>
+    <!-- Enlace a Términos y Condiciones -->
+    <p style="margin-top: 10px; font-size: 0.9rem;">
+      <a href="docs/terminos-y-condiciones.pdf" target="_blank" style="color: #bbb; text-decoration: underline;" 
+         data-es="Términos y Condiciones" data-en="Terms and Conditions">Términos y Condiciones</a>
+    </p>
+  </div>
+</footer>
+
+  <script>
+        // Configuration object
+        const defaultConfig = {
+            clinic_name: "Consultorio Salud",
+            hero_title_es: "Atención Integral en Salud",
+            hero_title_en: "Integrated Health Care",
+            hero_subtitle_es: "Somos tu servicio de salud integral humano y resolutivo",
+            hero_subtitle_en: "We are your comprehensive, compassionate, and efficient health care service.",
+        };
+        // Current language
+        let currentLanguage = 'es';
+        // Navigation functionality
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link[data-page]');
+            const pages = document.querySelectorAll('.page');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navMenu = document.getElementById('nav-menu');
+      // Page navigation
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetPage = link.getAttribute('data-page');
+        // Update active nav link
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        // Show target page
+        pages.forEach(page => page.classList.remove('active'));
+        const targetElement = document.getElementById(targetPage + '-page');
+        if (targetElement) {
+            targetElement.classList.add('active');
+            // Scroll to top of the page with offset for fixed header
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+        // Close mobile menu
+        navMenu.classList.remove('active');
+    });
+});
+            // Mobile menu toggle
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            // Language switching
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        }
+        // Language switching functionality
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            const elements = document.querySelectorAll('[data-es][data-en]');
+            elements.forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else if (element.tagName === 'OPTION') {
+                        element.textContent = text;
+                    } else {
+                        element.innerHTML = text;
+                    }
+                }
+            });
+            // Update hero title and subtitle from config
+            updateHeroContent();
+        }
+       
+    
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--primary-color)' : 'var(--accent2)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 500;
+                max-width: 300px;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            // Add slide-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+        // Update hero content from config
+        function updateHeroContent() {
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroTitle && heroSubtitle) {
+                const titleKey = `hero_title_${currentLanguage}`;
+                const subtitleKey = `hero_subtitle_${currentLanguage}`;
+                heroTitle.textContent = window.elementSdk?.config?.[titleKey] || defaultConfig[titleKey];
+                heroSubtitle.textContent = window.elementSdk?.config?.[subtitleKey] || defaultConfig[subtitleKey];
+            }
+        }
+        // Update clinic name from config
+        function updateClinicName() {
+            const clinicNameElements = document.querySelectorAll('#clinic-name, #footer-clinic-name');
+            const clinicName = window.elementSdk?.config?.clinic_name || defaultConfig.clinic_name;
+            clinicNameElements.forEach(element => {
+                element.textContent = clinicName;
+            });
+        }
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            updateClinicName();
+            updateHeroContent();
+        }
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.primary_color || '#bfc52c',
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || '#06919d',
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.background_light || '#e7e6e6',
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_light: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_dark || '#4e4d4d',
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_dark: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.accent1 || '#f6c01d',
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent1: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || 'Poppins',
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || 16,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ['clinic_name', config.clinic_name || defaultConfig.clinic_name],
+                ['hero_title_es', config.hero_title_es || defaultConfig.hero_title_es],
+                ['hero_title_en', config.hero_title_en || defaultConfig.hero_title_en],
+                ['hero_subtitle_es', config.hero_subtitle_es || defaultConfig.hero_subtitle_es],
+                ['hero_subtitle_en', config.hero_subtitle_en || defaultConfig.hero_subtitle_en]
+            ]);
+        }
+
+        // Carrusel de fondo del hero
+        function startHeroBackgroundCarousel() {
+            const backgrounds = document.querySelectorAll('.hero-bg');
+            let currentIndex = 0;
+            function showNext() {
+                backgrounds.forEach((bg, index) => {
+                    bg.classList.toggle('active', index === currentIndex);
+                });
+                currentIndex = (currentIndex + 1) % backgrounds.length;
+            }
+            if (backgrounds.length > 0) {
+                backgrounds[0].classList.add('active');
+            }
+            setInterval(showNext, 6000);
+        }
+
+        // Initialize everything when DOM is loaded (SOLO UNA VEZ)
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+           
+            startHeroBackgroundCarousel(); // ✅ Iniciar carrusel
+            // Initialize Element SDK if available
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+        });
+    </script>
+
+    <script>
+        (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99975d9532f6f7b0',t:'MTc2MjI5MzQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+    </script>
+</body>
+</html>
